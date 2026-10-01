@@ -10,123 +10,485 @@
 <meta property="og:title" content="Nisar Ahmad — Applied AI Engineer | LLMs, RAG &amp; Agentic AI">
 <meta property="og:description" content="Applied AI Engineer based in Lahore, Pakistan, building production-grade AI systems: LLM applications, RAG pipelines, agentic AI with LangChain and LangGraph, FastAPI APIs, and MCP tooling.">
 <meta property="og:url" content="https://nisarahmad78.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b1220; --panel:#111c30; --panel2:#0f1930; --border:#1e3a5f;
-    --text:#e6edf7; --muted:#9db2cc; --accent:#38bdf8; --accent2:#22d3ee;
+    --bg:#0a1128; --bg2:#0d1b2e; --panel:#101f38; --panel2:#0c1930;
+    --border:#1d3355; --text:#e9eff8; --muted:#9db2cc; --muted2:#7e93b3;
+    --accent:#22d3ee; --accent2:#0ea5e9; --accent-soft:rgba(34,211,238,.12);
+    --radius:16px; --nav-h:68px;
+    --shadow:0 18px 40px rgba(2,8,23,.55);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-  header{padding:72px 0 40px;text-align:center;background:linear-gradient(180deg,#0d1b33 0%,var(--bg) 100%)}
-  header h1{font-size:2.6rem;font-weight:700;letter-spacing:-0.5px}
-  header .role{font-size:1.2rem;color:var(--accent2);margin-top:8px;font-weight:600}
-  header .tagline{color:var(--muted);max-width:640px;margin:16px auto 0}
-  .links{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .links a{border:1px solid var(--border);background:var(--panel);padding:8px 18px;border-radius:999px;color:var(--text);font-size:.95rem}
-  .links a:hover{border-color:var(--accent);text-decoration:none}
-  section{padding:36px 0}
-  h2{font-size:1.5rem;margin-bottom:16px;border-bottom:2px solid var(--border);padding-bottom:8px}
-  .about p{color:var(--muted);margin-bottom:12px}
-  .about strong{color:var(--text)}
-  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .stack span{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:.88rem;color:var(--text)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;display:flex;flex-direction:column}
-  .card h3{font-size:1.12rem;margin-bottom:8px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  section{padding:84px 0;scroll-margin-top:calc(var(--nav-h) + 12px)}
+  .sec-head{max-width:640px;margin-bottom:40px}
+  .sec-label{
+    display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);border:1px solid rgba(34,211,238,.3);
+    padding:5px 12px;border-radius:999px;margin-bottom:14px;
+  }
+  .sec-head h2{font-size:2rem;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+  .sec-head p{color:var(--muted);margin-top:10px}
+
+  /* ---------- Nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:100;height:var(--nav-h);
+    background:rgba(10,17,40,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(29,51,85,.7);
+  }
+  .nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:700;font-size:1.02rem}
+  .brand:hover{text-decoration:none}
+  .brand .mono{
+    width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);color:#06222e;
+    font-weight:800;font-size:.95rem;letter-spacing:.02em;flex:none;
+  }
+  .brand small{display:block;font-weight:500;font-size:.72rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  .nav-links{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .nav-links a{color:var(--muted);font-size:.92rem;font-weight:500;padding:8px 12px;border-radius:8px}
+  .nav-links a:hover{color:var(--text);background:rgba(34,211,238,.08);text-decoration:none}
+  .nav-links a.cta{color:#06222e;background:linear-gradient(135deg,var(--accent),var(--accent2));font-weight:600}
+  .nav-links a.cta:hover{color:#06222e;filter:brightness(1.08)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;padding:110px 0 96px;
+    background:
+      radial-gradient(640px 340px at 82% -60px, rgba(34,211,238,.20), transparent 65%),
+      radial-gradient(560px 320px at 8% 0, rgba(14,165,233,.14), transparent 60%),
+      linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(56,130,246,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(56,130,246,.07) 1px,transparent 1px);
+    background-size:46px 46px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 75%);
+            mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 75%);
+  }
+  .hero .wrap{position:relative}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);
+    border:1px solid var(--border);background:rgba(16,31,56,.7);padding:6px 14px;border-radius:999px;margin-bottom:26px;
+  }
+  .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(34,211,238,.18)}
+  .hero h1{font-size:clamp(2.7rem,6.5vw,4.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.06}
+  .hero h1 .grad{
+    background:linear-gradient(92deg,var(--accent) 10%,var(--accent2) 60%,#7dd3fc 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  }
+  .hero .role{font-size:clamp(1.25rem,3vw,1.7rem);font-weight:600;color:var(--text);margin-top:14px}
+  .hero .tagline{color:var(--muted);font-size:1.08rem;max-width:620px;margin-top:16px}
+  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:12px;
+    font-weight:600;font-size:.98rem;border:1px solid transparent;transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+  }
+  .btn:hover{text-decoration:none;transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#06222e;box-shadow:0 10px 26px rgba(14,165,233,.35)}
+  .btn-primary:hover{filter:brightness(1.07)}
+  .btn-ghost{background:rgba(16,31,56,.6);border-color:var(--border);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);box-shadow:0 10px 24px rgba(2,8,23,.4)}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:52px;padding-top:28px;border-top:1px solid rgba(29,51,85,.7)}
+  .hero-meta .item b{display:block;font-size:1.05rem;font-weight:700}
+  .hero-meta .item span{font-size:.85rem;color:var(--muted2)}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:start}
+  .about-copy p{color:var(--muted);margin-bottom:16px;font-size:1.02rem}
+  .about-copy strong{color:var(--text)}
+  .about-card{
+    background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);
+    border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);
+  }
+  .about-card h3{font-size:1rem;font-weight:700;margin-bottom:16px}
+  .about-card ul{list-style:none}
+  .about-card li{padding:10px 0;border-bottom:1px solid rgba(29,51,85,.6);font-size:.94rem;color:var(--muted)}
+  .about-card li:last-child{border-bottom:none;padding-bottom:0}
+  .about-card li b{color:var(--text);font-weight:600;display:block;font-size:.97rem}
+
+  /* ---------- Skills ---------- */
+  .skills-sec{background:linear-gradient(180deg,rgba(13,27,46,.65),rgba(10,17,40,0));border-top:1px solid rgba(29,51,85,.5);border-bottom:1px solid rgba(29,51,85,.5)}
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+  .skill-group{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+  .skill-group h3{font-size:.82rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    background:rgba(34,211,238,.06);border:1px solid rgba(125,160,205,.25);color:var(--text);
+    border-radius:999px;padding:6px 14px;font-size:.9rem;font-weight:500;
+  }
+
+  /* ---------- Projects ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(34,211,238,.45)}
+  .card .shot{display:block;aspect-ratio:16/9;overflow:hidden;background:#0a1830;border-bottom:1px solid var(--border)}
+  .card .shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+  .card:hover .shot img{transform:scale(1.03)}
+  .card .ph{
+    aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    background:
+      radial-gradient(420px 200px at 80% 0%,rgba(34,211,238,.28),transparent 65%),
+      radial-gradient(360px 200px at 10% 110%,rgba(14,165,233,.22),transparent 60%),
+      linear-gradient(140deg,#0d2242 0%,#081426 100%);
+    border-bottom:1px solid var(--border);padding:20px;text-align:center;
+  }
+  .card .ph .ph-name{font-size:1.7rem;font-weight:800;letter-spacing:.28em;color:#f2f8ff;text-indent:.28em}
+  .card .ph .ph-sub{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1}
+  .card h3{font-size:1.13rem;font-weight:700;line-height:1.35}
   .card h3 a{color:var(--text)}
-  .card h3 a:hover{color:var(--accent)}
-  .card p{color:var(--muted);font-size:.95rem;flex:1}
-  .card .repo{margin-top:14px;font-size:.9rem;font-weight:600}
-  footer{border-top:1px solid var(--border);padding:28px 0 40px;text-align:center;color:var(--muted);font-size:.92rem}
-  footer .flinks{margin-bottom:10px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-  @media (max-width:600px){header{padding:48px 0 28px}header h1{font-size:2rem}}
+  .card h3 a:hover{color:var(--accent);text-decoration:none}
+  .card p{color:var(--muted);font-size:.95rem;margin-top:9px;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+  .tag{font-size:.76rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:3px 9px}
+  .card .repo{margin-top:18px;padding-top:16px;border-top:1px solid rgba(29,51,85,.6);font-weight:600;font-size:.93rem}
+  .card .repo a{display:inline-flex;align-items:center;gap:7px}
+  .card .repo a:hover{text-decoration:none;color:#7dd3fc}
+
+  /* ---------- Experience ---------- */
+  .timeline{position:relative;max-width:760px;padding-left:34px}
+  .timeline::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--accent),rgba(34,211,238,.08))}
+  .tl-item{position:relative;padding-bottom:36px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{
+    content:"";position:absolute;left:-33px;top:7px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg);border:3px solid var(--accent);
+  }
+  .tl-item .when{font-size:.83rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .tl-item h3{font-size:1.15rem;font-weight:700;margin-top:5px}
+  .tl-item .org{color:var(--text);font-weight:600;font-size:.98rem}
+  .tl-item p{color:var(--muted);font-size:.96rem;margin-top:6px;max-width:620px}
+
+  /* ---------- Footer / Connect ---------- */
+  footer{background:var(--bg2);border-top:1px solid rgba(29,51,85,.7);padding:72px 0 42px}
+  .connect-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:48px}
+  .connect-card{
+    display:block;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 22px;color:var(--text);
+    transition:transform .2s ease,border-color .2s ease;
+  }
+  .connect-card:hover{text-decoration:none;transform:translateY(-3px);border-color:rgba(34,211,238,.45)}
+  .connect-card .c-label{font-size:.78rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+  .connect-card .c-value{display:block;margin-top:6px;font-weight:600;font-size:.97rem;word-break:break-all}
+  .foot-bottom{border-top:1px solid rgba(29,51,85,.7);padding-top:26px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted2);font-size:.9rem}
+
+  /* ---------- Reveal animation ---------- */
+  .js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:820px){
+    .about-grid{grid-template-columns:1fr}
+    section{padding:64px 0}
+    .hero{padding:84px 0 72px}
+  }
+  @media (max-width:560px){
+    .nav{height:auto;padding:10px 0}
+    .nav .wrap{justify-content:center}
+    .brand small{display:none}
+    section{scroll-margin-top:110px}
+    .grid{grid-template-columns:1fr}
+    .hero-meta{gap:20px}
+    .btn{padding:12px 20px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .js .reveal{opacity:1;transform:none;transition:none}
+    .card,.btn,.connect-card,.card .shot img{transition:none}
+  }
 </style>
 </head>
 <body>
 
-<header>
+<nav class="nav">
   <div class="wrap">
-    <h1>Nisar Ahmad</h1>
-    <div class="role">Applied AI Engineer | LLMs, RAG &amp; Agentic AI</div>
+    <a class="brand" href="#top">
+      <span class="mono">NA</span>
+      <span>Nisar Ahmad<small>Applied AI Engineer</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a class="cta" href="#connect">Connect</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="hero-badge"><span class="dot"></span>Lahore, Pakistan</span>
+    <h1>Nisar Ahmad<br><span class="grad">Applied AI Engineer</span></h1>
+    <p class="role">LLMs, RAG &amp; Agentic AI</p>
     <p class="tagline">I design and build production-grade AI systems: LLM applications, RAG pipelines, and autonomous agents that solve real business problems.</p>
-    <div class="links">
-      <a href="https://github.com/nisarahmad78">GitHub Profile</a>
-      <a href="https://www.linkedin.com/in/nisarahmad78">LinkedIn</a>
-      <a href="mailto:talk2nisar78@gmail.com">talk2nisar78@gmail.com</a>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-ghost" href="https://github.com/nisarahmad78">GitHub Profile</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/nisarahmad78">LinkedIn</a>
+    </div>
+    <div class="hero-meta">
+      <div class="item"><b>3+ Years</b><span>AI / ML engineering experience</span></div>
+      <div class="item"><b>6 Projects</b><span>Open-source AI systems on GitHub</span></div>
+      <div class="item"><b>End to End</b><span>Prototype to production delivery</span></div>
     </div>
   </div>
 </header>
 
-<main class="wrap">
+<main>
 
-  <section class="about">
-    <h2>About Me</h2>
-    <p><strong>Applied AI Engineer</strong> with 3+ years of experience across ML engineering, Generative AI, and MLOps. Currently an AI Engineer at <strong>Excels Tech Solution LLC</strong> in Lahore, Pakistan, previously an ML Engineer at PerceptronAI.</p>
-    <p>I take AI products from prototype to production: APIs, vector search, agent workflows, observability, and cost/latency optimization.</p>
-    <div class="stack">
-      <span>Python</span><span>LLMs</span><span>RAG</span><span>LangChain</span><span>LangGraph</span>
-      <span>FastAPI</span><span>ChromaDB</span><span>MCP</span><span>Google Cloud Platform</span>
-      <span>PyTorch</span><span>Docker</span><span>PostgreSQL</span>
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-label">About</span>
+        <h2>Building AI that ships to production</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy reveal">
+          <p><strong>Applied AI Engineer</strong> with 3+ years of experience across ML engineering, Generative AI, and MLOps. I am currently an AI Engineer at <strong>Excels Tech Solution LLC</strong> in Lahore, Pakistan, and previously worked as an ML Engineer at <strong>PerceptronAI</strong>.</p>
+          <p>I take AI products from prototype to production: APIs, vector search, agent workflows, observability, and cost and latency optimization. My flagship work is <strong>VOCALIQ</strong>, a real-time voice AI platform with bilingual Urdu and English agents grounded by Graph RAG.</p>
+          <p>Alongside industry work, I have also taught at university level as a <strong>Junior Lecturer at Superior University</strong>. I hold a <strong>B.S. in Computer Science</strong> from COMSATS University Islamabad, and I am open to freelance projects in LLMs, RAG, AI agents, and AI automation.</p>
+        </div>
+        <aside class="about-card reveal">
+          <h3>At a Glance</h3>
+          <ul>
+            <li><b>Current Role</b>AI Engineer, Excels Tech Solution LLC</li>
+            <li><b>Experience</b>3+ years in AI and ML engineering</li>
+            <li><b>Focus</b>LLM apps, RAG pipelines, agentic AI</li>
+            <li><b>Academia</b>Junior Lecturer, Superior University</li>
+            <li><b>Education</b>B.S. Computer Science, COMSATS</li>
+            <li><b>Location</b>Lahore, Pakistan</li>
+          </ul>
+        </aside>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Featured Projects</h2>
-    <div class="grid">
-
-      <div class="card">
-        <h3><a href="https://github.com/nisarahmad78/VOCALIQ">VOCALIQ — AI Voice Customer Experience Platform</a></h3>
-        <p>Voice AI assistant with real-time voice interaction and an LLM backend using Graph RAG. Real-time bilingual (Urdu and English) voice agents with WebRTC calls and barge-in interruption handling.</p>
-        <div class="repo"><a href="https://github.com/nisarahmad78/VOCALIQ">View on GitHub</a></div>
+  <section id="skills" class="skills-sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-label">Skills</span>
+        <h2>Tech stack</h2>
+        <p>The tools I use to design, build, and run AI systems in production.</p>
       </div>
-
-      <div class="card">
-        <h3><a href="https://github.com/nisarahmad78/rag-document-qa">RAG Document Q&amp;A — Chat With Your Documents</a></h3>
-        <p>Upload documents and chat with them. FastAPI + ChromaDB retrieval with source-backed answers and a clean web UI.</p>
-        <div class="repo"><a href="https://github.com/nisarahmad78/rag-document-qa">View on GitHub</a></div>
+      <div class="skill-groups">
+        <div class="skill-group reveal">
+          <h3>Languages &amp; Core</h3>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">SQL</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>AI / LLM</h3>
+          <div class="chips">
+            <span class="chip">LLMs</span>
+            <span class="chip">RAG</span>
+            <span class="chip">LangChain</span>
+            <span class="chip">LangGraph</span>
+            <span class="chip">MCP</span>
+            <span class="chip">Prompt Engineering</span>
+            <span class="chip">ChromaDB</span>
+            <span class="chip">pgvector</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Backend &amp; Cloud</h3>
+          <div class="chips">
+            <span class="chip">FastAPI</span>
+            <span class="chip">Docker</span>
+            <span class="chip">Google Cloud Platform</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">Redis</span>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="card">
-        <h3><a href="https://github.com/nisarahmad78/langgraph-ai-agent">LangGraph AI Agent — Tool-Using Agent with Web UI</a></h3>
-        <p>Tool-using AI agent built on LangGraph — calculator, web search, and knowledge lookup — with CLI, API, and a web chat UI.</p>
-        <div class="repo"><a href="https://github.com/nisarahmad78/langgraph-ai-agent">View on GitHub</a></div>
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-label">Projects</span>
+        <h2>Featured work</h2>
+        <p>Open-source AI systems I designed and built end to end, from backend architecture to the user interface.</p>
       </div>
+      <div class="grid">
 
-      <div class="card">
-        <h3><a href="https://github.com/nisarahmad78/mcp-server-suite">MCP Server Suite — Model Context Protocol Tools Server</a></h3>
-        <p>Production-style Model Context Protocol server (SQL, file search, web fetch tools) with a web demo client.</p>
-        <div class="repo"><a href="https://github.com/nisarahmad78/mcp-server-suite">View on GitHub</a></div>
+        <article class="card reveal">
+          <div class="ph" role="img" aria-label="VOCALIQ project artwork">
+            <span class="ph-name">VOCALIQ</span>
+            <span class="ph-sub">Voice AI Platform</span>
+          </div>
+          <div class="card-body">
+            <h3><a href="https://github.com/nisarahmad78/VOCALIQ">VOCALIQ — AI Voice Customer Experience Platform</a></h3>
+            <p>Real-time bilingual (Urdu and English) voice AI platform with multi-agent workflows, full-duplex WebRTC voice calls, barge-in interruption handling, and Graph RAG knowledge grounding.</p>
+            <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">FastAPI</span><span class="tag">WebRTC</span><span class="tag">Graph RAG</span></div>
+            <div class="repo"><a href="https://github.com/nisarahmad78/VOCALIQ">View on GitHub <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <a class="shot" href="https://github.com/nisarahmad78/rag-document-qa"><img src="https://raw.githubusercontent.com/nisarahmad78/rag-document-qa/main/docs/screenshot.png" alt="RAG Document Q&amp;A web interface" loading="lazy"></a>
+          <div class="card-body">
+            <h3><a href="https://github.com/nisarahmad78/rag-document-qa">RAG Document Q&amp;A — Chat With Your Documents</a></h3>
+            <p>Upload PDF or TXT documents and ask questions in plain language. Documents are chunked and embedded into ChromaDB, and answers come back grounded with source citations.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">ChromaDB</span><span class="tag">Embeddings</span><span class="tag">Docker</span></div>
+            <div class="repo"><a href="https://github.com/nisarahmad78/rag-document-qa">View on GitHub <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <a class="shot" href="https://github.com/nisarahmad78/langgraph-ai-agent"><img src="https://raw.githubusercontent.com/nisarahmad78/langgraph-ai-agent/main/docs/screenshot.png" alt="LangGraph AI Agent web chat interface" loading="lazy"></a>
+          <div class="card-body">
+            <h3><a href="https://github.com/nisarahmad78/langgraph-ai-agent">LangGraph AI Agent — Tool-Using Agent with Web UI</a></h3>
+            <p>An AI agent built with LangGraph that reasons over tools: calculator, live web search, current date and time, and a knowledge lookup, with per-session memory across a CLI, a FastAPI API, and a browser chat UI.</p>
+            <div class="tags"><span class="tag">LangGraph</span><span class="tag">LangChain</span><span class="tag">FastAPI</span></div>
+            <div class="repo"><a href="https://github.com/nisarahmad78/langgraph-ai-agent">View on GitHub <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <a class="shot" href="https://github.com/nisarahmad78/mcp-server-suite"><img src="https://raw.githubusercontent.com/nisarahmad78/mcp-server-suite/main/docs/screenshot.png" alt="MCP Server Suite web demo client" loading="lazy"></a>
+          <div class="card-body">
+            <h3><a href="https://github.com/nisarahmad78/mcp-server-suite">MCP Server Suite — Model Context Protocol Tools Server</a></h3>
+            <p>A production-style MCP server exposing four tools: read-only SQL queries, file search, web fetch, and revenue analytics, over stdio and HTTP, plus a web demo client that discovers tools live.</p>
+            <div class="tags"><span class="tag">MCP</span><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Docker</span></div>
+            <div class="repo"><a href="https://github.com/nisarahmad78/mcp-server-suite">View on GitHub <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <a class="shot" href="https://github.com/nisarahmad78/ai-support-desk"><img src="https://raw.githubusercontent.com/nisarahmad78/ai-support-desk/main/docs/screenshot.png" alt="AI Support Desk dashboard interface" loading="lazy"></a>
+          <div class="card-body">
+            <h3><a href="https://github.com/nisarahmad78/ai-support-desk">AI Support Desk — AI Auto-Triage for Support Tickets</a></h3>
+            <p>SaaS-style support desk where every incoming ticket is auto-triaged by AI: category, priority, and sentiment are detected, and a reply is drafted before an agent opens it.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">SQLite</span><span class="tag">AI Triage</span><span class="tag">Docker</span></div>
+            <div class="repo"><a href="https://github.com/nisarahmad78/ai-support-desk">View on GitHub <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <a class="shot" href="https://github.com/nisarahmad78/llm-gateway"><img src="https://raw.githubusercontent.com/nisarahmad78/llm-gateway/main/docs/screenshot.png" alt="LLM Gateway observability dashboard" loading="lazy"></a>
+          <div class="card-body">
+            <h3><a href="https://github.com/nisarahmad78/llm-gateway">LLM Gateway — Unified LLM API with Observability</a></h3>
+            <p>One OpenAI-compatible API in front of multiple LLM providers, with API-key auth, per-key rate limiting, retries, streaming, and a live dashboard tracking requests, tokens, cost, and latency.</p>
+            <div class="tags"><span class="tag">FastAPI</span><span class="tag">Streaming</span><span class="tag">Rate Limiting</span><span class="tag">SQLite</span></div>
+            <div class="repo"><a href="https://github.com/nisarahmad78/llm-gateway">View on GitHub <span aria-hidden="true">&rarr;</span></a></div>
+          </div>
+        </article>
+
       </div>
+    </div>
+  </section>
 
-      <div class="card">
-        <h3><a href="https://github.com/nisarahmad78/ai-support-desk">AI Support Desk — AI Auto-Triage for Support Tickets</a></h3>
-        <p>SaaS-style support system with AI auto-triage: category, priority, sentiment, and drafted replies on a live dashboard.</p>
-        <div class="repo"><a href="https://github.com/nisarahmad78/ai-support-desk">View on GitHub</a></div>
+  <section id="experience" class="skills-sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-label">Experience</span>
+        <h2>Career &amp; education</h2>
       </div>
-
-      <div class="card">
-        <h3><a href="https://github.com/nisarahmad78/llm-gateway">LLM Gateway — Unified LLM API with Observability</a></h3>
-        <p>Unified API in front of LLM providers with auth, rate limiting, streaming, and a cost/latency observability dashboard.</p>
-        <div class="repo"><a href="https://github.com/nisarahmad78/llm-gateway">View on GitHub</a></div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <span class="when">Dec 2025 — Present</span>
+          <h3>AI Engineer</h3>
+          <div class="org">Excels Tech Solution LLC — Lahore, Pakistan</div>
+          <p>Building production AI systems with LLMs, RAG pipelines, and agentic workflows.</p>
+        </div>
+        <div class="tl-item reveal">
+          <span class="when">Feb 2025 — Jan 2026</span>
+          <h3>Junior Lecturer</h3>
+          <div class="org">Superior University</div>
+          <p>University-level teaching alongside industry engineering work.</p>
+        </div>
+        <div class="tl-item reveal">
+          <span class="when">Aug 2023 — Aug 2025</span>
+          <h3>ML Engineer</h3>
+          <div class="org">PerceptronAI — Lahore, Pakistan</div>
+          <p>Machine learning engineering: model development, data pipelines, and ML-backed product features.</p>
+        </div>
+        <div class="tl-item reveal">
+          <span class="when">2019 — 2023</span>
+          <h3>B.S. Computer Science</h3>
+          <div class="org">COMSATS University Islamabad</div>
+          <p>Bachelor's degree in Computer Science.</p>
+        </div>
       </div>
-
     </div>
   </section>
 
 </main>
 
-<footer>
+<footer id="connect">
   <div class="wrap">
-    <div class="flinks">
-      <a href="https://github.com/nisarahmad78">GitHub — github.com/nisarahmad78</a>
-      <a href="https://www.linkedin.com/in/nisarahmad78">LinkedIn — linkedin.com/in/nisarahmad78</a>
+    <div class="sec-head reveal">
+      <span class="sec-label">Connect</span>
+      <h2>Let's work together</h2>
+      <p>Open to freelance projects and interesting AI work. Reach me on any of these platforms.</p>
     </div>
-    <div>Nisar Ahmad — Applied AI Engineer, Lahore, Pakistan</div>
+    <div class="connect-grid">
+      <a class="connect-card reveal" href="https://github.com/nisarahmad78">
+        <span class="c-label">GitHub</span>
+        <span class="c-value">github.com/nisarahmad78</span>
+      </a>
+      <a class="connect-card reveal" href="https://www.linkedin.com/in/nisarahmad78">
+        <span class="c-label">LinkedIn</span>
+        <span class="c-value">linkedin.com/in/nisarahmad78</span>
+      </a>
+      <a class="connect-card reveal" href="mailto:talk2nisar78@gmail.com">
+        <span class="c-label">Email</span>
+        <span class="c-value">talk2nisar78@gmail.com</span>
+      </a>
+      <a class="connect-card reveal" href="https://www.upwork.com/freelancers/~014aee86c434adbc22">
+        <span class="c-label">Upwork</span>
+        <span class="c-value">Hire me on Upwork</span>
+      </a>
+      <a class="connect-card reveal" href="https://www.freelancer.com/u/nisarahmad7878">
+        <span class="c-label">Freelancer</span>
+        <span class="c-value">Hire me on Freelancer</span>
+      </a>
+    </div>
+    <div class="foot-bottom">
+      <span>Nisar Ahmad — Applied AI Engineer</span>
+      <span>Lahore, Pakistan</span>
+    </div>
   </div>
 </footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
 
 </body>
 </html>
