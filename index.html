@@ -10,6 +10,7 @@
 <meta property="og:title" content="Nisar Ahmad — Applied AI Engineer | LLMs, RAG &amp; Agentic AI">
 <meta property="og:description" content="Applied AI Engineer based in Lahore, Pakistan, building production-grade AI systems: LLM applications, RAG pipelines, agentic AI with LangChain and LangGraph, FastAPI APIs, and MCP tooling.">
 <meta property="og:url" content="https://nisarahmad78.github.io/">
+<meta property="og:image" content="https://nisarahmad78.github.io/assets/profile.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -103,6 +104,14 @@
   .hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:52px;padding-top:28px;border-top:1px solid rgba(29,51,85,.7)}
   .hero-meta .item b{display:block;font-size:1.05rem;font-weight:700}
   .hero-meta .item span{font-size:.85rem;color:var(--muted2)}
+  .hero-main{display:flex;align-items:center;gap:52px}
+  .hero-text{flex:1;min-width:0}
+  .hero-photo{flex:none}
+  .hero-photo img{
+    width:176px;height:176px;border-radius:50%;object-fit:cover;display:block;background:var(--panel);
+    border:3px solid var(--accent);
+    box-shadow:0 0 0 7px rgba(34,211,238,.10),0 0 46px rgba(34,211,238,.30),0 20px 44px rgba(2,8,23,.6);
+  }
 
   /* ---------- About ---------- */
   .about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:start}
@@ -195,6 +204,12 @@
     .about-grid{grid-template-columns:1fr}
     section{padding:64px 0}
     .hero{padding:84px 0 72px}
+    .hero-main{flex-direction:column;align-items:center;text-align:center;gap:30px}
+    .hero-text{display:flex;flex-direction:column;align-items:center}
+    .hero-photo{order:-1}
+    .hero-photo img{width:148px;height:148px}
+    .hero .ctas{justify-content:center}
+    .hero-meta{justify-content:center}
   }
   @media (max-width:560px){
     .nav{height:auto;padding:10px 0}
@@ -232,14 +247,21 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="hero-badge"><span class="dot"></span>Lahore, Pakistan</span>
-    <h1>Nisar Ahmad<br><span class="grad">Applied AI Engineer</span></h1>
-    <p class="role">LLMs, RAG &amp; Agentic AI</p>
-    <p class="tagline">I design and build production-grade AI systems: LLM applications, RAG pipelines, and autonomous agents that solve real business problems.</p>
-    <div class="ctas">
-      <a class="btn btn-primary" href="#projects">View Projects</a>
-      <a class="btn btn-ghost" href="https://github.com/nisarahmad78">GitHub Profile</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/nisarahmad78">LinkedIn</a>
+    <div class="hero-main">
+      <div class="hero-text">
+        <span class="hero-badge"><span class="dot"></span>Lahore, Pakistan</span>
+        <h1>Nisar Ahmad<br><span class="grad">Applied AI Engineer</span></h1>
+        <p class="role">LLMs, RAG &amp; Agentic AI</p>
+        <p class="tagline">I design and build production-grade AI systems: LLM applications, RAG pipelines, and autonomous agents that solve real business problems.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-ghost" href="https://github.com/nisarahmad78">GitHub Profile</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/nisarahmad78">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="assets/profile.jpg" alt="Nisar Ahmad" width="460" height="460">
+      </div>
     </div>
     <div class="hero-meta">
       <div class="item"><b>3+ Years</b><span>AI / ML engineering experience</span></div>
